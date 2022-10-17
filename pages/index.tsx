@@ -1,7 +1,16 @@
-import type { NextPage } from "next";
-import Head from "next/head";
+import { useQuery } from '@apollo/client';
+import Head from 'next/head';
+import { ALL_PRODUCTS_QUERY } from '../lib/queries';
+import { ProductsResponse } from '../lib/types/queries/product';
 
-const Home: NextPage = () => {
+const Home = () => {
+  const { loading, error, data } =
+    useQuery<ProductsResponse>(ALL_PRODUCTS_QUERY);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Head>
@@ -11,6 +20,11 @@ const Home: NextPage = () => {
       </Head>
 
       <div>E-commerce</div>
+      <div>
+        {data?.products.items.map(({ id, name }) => (
+          <p key={id}>{name}</p>
+        ))}
+      </div>
     </div>
   );
 };
