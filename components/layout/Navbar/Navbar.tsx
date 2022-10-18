@@ -2,12 +2,26 @@ import { Flex, Text, Box, Button } from 'rebass/styled-components';
 import { Label, Input } from '@rebass/forms';
 import Image from 'next/image';
 import styled from 'styled-components';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const InputContainer = styled.div`
   margin-right: 6px;
 `;
 
 const Navbar = () => {
+  const [searchValue, setSearchValue] = useState('');
+  const { push, pathname } = useRouter();
+
+  const onSearchClick = () => {
+    console.log('pathName', pathname);
+    const query = searchValue ? `?q=${searchValue}` : '';
+
+    push(`/search${query}`, undefined, {
+      shallow: pathname === '/search',
+    });
+  };
+
   return (
     <Flex
       px={2}
@@ -21,9 +35,17 @@ const Navbar = () => {
       <Box>
         <Flex>
           <InputContainer>
-            <Input name="search" placeholder="search..." variant="primary" />
+            <Input
+              value={searchValue}
+              onChange={({ target: { value } }) => setSearchValue(value)}
+              name="search"
+              placeholder="search..."
+              variant="primary"
+            />
           </InputContainer>
-          <Button variant="primary">Search</Button>
+          <Button variant="primary" onClick={onSearchClick}>
+            Search
+          </Button>
         </Flex>
       </Box>
       <Box>

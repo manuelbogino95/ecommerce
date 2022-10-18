@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Box } from 'rebass/styled-components';
 import Footer from './Footer';
 import Navbar from './Navbar';
 
@@ -10,7 +11,9 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Navbar />
-      {children}
+      <Box p={40} mx="auto" minHeight="100vh">
+        {children}
+      </Box>
       <Footer />
     </>
   );

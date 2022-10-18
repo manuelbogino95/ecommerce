@@ -1,12 +1,20 @@
-export interface Product {
-  id: string;
-  name: string;
+export interface SearchProduct {
+  productId: string;
+  sku: string;
+  productName: string;
   slug: string;
   description: string;
+  productAsset?: {
+    preview: string;
+  };
+  priceWithTax: {
+    min: number;
+    max: number;
+  };
 }
 
-export interface ProductsResponse {
-  products: {
-    items: Product[];
+export interface SearchProductsResponse {
+  search: {
+    items: SearchProduct[];
   };
 }
