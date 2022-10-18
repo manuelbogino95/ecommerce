@@ -40,3 +40,23 @@ export const SEARCH_PRODUCTS_QUERY = gql`
     }
   }
 `;
+
+export const GET_PRODUCT_DETAILS = gql`
+  query GetProduct($slug: String) {
+    product(slug: $slug) {
+      id
+      name
+      slug
+      description
+      featuredAsset {
+        source
+      }
+      variants {
+        id
+        sku
+        name
+        priceWithTax
+      }
+    }
+  }
+`;

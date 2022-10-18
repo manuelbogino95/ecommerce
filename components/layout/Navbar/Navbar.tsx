@@ -14,7 +14,6 @@ const Navbar = () => {
   const { push, pathname } = useRouter();
 
   const onSearchClick = () => {
-    console.log('pathName', pathname);
     const query = searchValue ? `?q=${searchValue}` : '';
 
     push(`/search${query}`, undefined, {

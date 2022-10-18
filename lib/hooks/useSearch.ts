@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 const useSearch = () => {
   const { query } = useRouter();
   const { q } = query;
-  console.log('q', q);
 
   const { loading, error, data } = useQuery<SearchProductsResponse>(
     SEARCH_PRODUCTS_QUERY,
