@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { SearchProduct } from 'lib/types/product';
 
-export function createRandomSearchProduct(): SearchProduct {
+export const createRandomSearchProduct = (): SearchProduct => {
   return {
     productId: faker.datatype.uuid(),
     sku: faker.random.word(),
@@ -16,4 +16,16 @@ export function createRandomSearchProduct(): SearchProduct {
       max: faker.datatype.number(),
     },
   };
-}
+};
+
+export const createRandomSearchProductList = (
+  length: number
+): SearchProduct[] => {
+  const searchProducts: SearchProduct[] = [];
+
+  Array.from({ length }).forEach(() => {
+    searchProducts.push(createRandomSearchProduct());
+  });
+
+  return searchProducts;
+};

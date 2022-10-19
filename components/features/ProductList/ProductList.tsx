@@ -1,18 +1,10 @@
 import { SearchProduct } from 'lib/types/product';
-import styled from 'styled-components';
 import ProductCard from '../ProductCard';
+import { GridContainer } from './index.styled';
 
 type ProductListProps = {
   products: SearchProduct[];
 };
-
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 256px);
-  justify-content: space-around;
-  grid-row-gap: 10px;
-  justify-content: center;
-`;
 
 const ProductList = ({ products }: ProductListProps) => {
   return (
