@@ -1,4 +1,4 @@
-import { SearchProduct } from 'lib/types/queries/product';
+import { SearchProduct } from 'lib/types/product';
 import styled from 'styled-components';
 import ProductCard from '../ProductCard';
 

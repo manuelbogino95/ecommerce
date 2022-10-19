@@ -1,12 +1,14 @@
+export interface FeaturedAsset {
+  preview: string;
+}
+
 export interface SearchProduct {
   productId: string;
   sku: string;
   productName: string;
   slug: string;
   description: string;
-  productAsset?: {
-    preview: string;
-  };
+  productAsset?: FeaturedAsset;
   priceWithTax: {
     min: number;
     max: number;
@@ -18,14 +20,12 @@ export interface ProductDetails {
   name: string;
   slug: string;
   description: string;
-  featuredAsset: {
-    source: string;
-  };
+  featuredAsset?: FeaturedAsset;
   variants: {
     id: string;
     sku: string;
     name: string;
-    priceWithTax: string;
+    priceWithTax: number;
   }[];
 }
 

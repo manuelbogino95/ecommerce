@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import ProductList from 'components/features/ProductList';
 import { SEARCH_PRODUCTS_QUERY } from 'lib/queries/productQueries';
 import Head from 'next/head';
-import { SearchProductsResponse } from '../lib/types/queries/product';
+import { SearchProductsResponse } from '../lib/types/product';
 
 const Home = () => {
   return (

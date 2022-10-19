@@ -49,7 +49,7 @@ export const GET_PRODUCT_DETAILS = gql`
       slug
       description
       featuredAsset {
-        source
+        preview
       }
       variants {
         id

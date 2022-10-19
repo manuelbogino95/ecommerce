@@ -1,3 +1,4 @@
+import ProductView from 'components/features/ProductView';
 import { initializeApollo } from 'lib/apolloClient';
 import {
   ALL_PRODUCTS_QUERY,
@@ -7,8 +8,8 @@ import {
   ProductDetails,
   ProductDetailsResponse,
   ProductListResponse,
-} from 'lib/types/queries/product';
-import type { GetStaticPathsContext, GetStaticPropsContext } from 'next';
+} from 'lib/types/product';
+import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 export async function getStaticProps({
@@ -36,7 +37,7 @@ export async function getStaticProps({
   };
 }
 
-export async function getStaticPaths({ locales }: GetStaticPathsContext) {
+export async function getStaticPaths() {
   const apolloClient = initializeApollo();
   const {
     data: {
@@ -59,5 +60,9 @@ type ProductPageProps = {
 export default function ProductPage({ product }: ProductPageProps) {
   const router = useRouter();
 
-  return router.isFallback ? <h1>Loading...</h1> : <p>{product.name}</p>;
+  return router.isFallback ? (
+    <h1>Loading...</h1>
+  ) : (
+    <ProductView {...{ product }} />
+  );
 }

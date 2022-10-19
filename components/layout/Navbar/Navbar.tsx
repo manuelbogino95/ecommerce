@@ -1,9 +1,10 @@
-import { Flex, Text, Box, Button } from 'rebass/styled-components';
-import { Label, Input } from '@rebass/forms';
+import { Flex, Box, Button } from 'rebass/styled-components';
+import { Input } from '@rebass/forms';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { useShoppingCart } from 'lib/context/shoppingCartContext';
 
 const InputContainer = styled.div`
   margin-right: 6px;
@@ -12,6 +13,8 @@ const InputContainer = styled.div`
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState('');
   const { push, pathname } = useRouter();
+  const { order } = useShoppingCart();
+  console.log('order', order);
 
   const onSearchClick = () => {
     const query = searchValue ? `?q=${searchValue}` : '';

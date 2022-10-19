@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { SEARCH_PRODUCTS_QUERY } from 'lib/queries/productQueries';
 import { filterQuery } from 'lib/search';
-import { SearchProductsResponse } from 'lib/types/queries/product';
+import { SearchProductsResponse } from 'lib/types/product';
 import { useRouter } from 'next/router';
 
 const useSearch = () => {

@@ -1,4 +1,5 @@
 import { ApolloProvider } from '@apollo/client';
+import { ShoppingCartProvider } from 'lib/context/shoppingCartContext';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import Layout from '../components/layout';
@@ -13,9 +14,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <ApolloProvider client={apolloClient}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <ShoppingCartProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ShoppingCartProvider>
         </ApolloProvider>
       </ThemeProvider>
     </>

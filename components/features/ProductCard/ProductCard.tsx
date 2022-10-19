@@ -1,6 +1,6 @@
 import { Card, Text } from 'rebass/styled-components';
 import Image from 'next/image';
-import { SearchProduct } from 'lib/types/queries/product';
+import { SearchProduct } from 'lib/types/product';
 import Link from 'next/link';
 import styled from 'styled-components';
 
