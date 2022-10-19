@@ -5,6 +5,7 @@ import {
   InMemoryCache,
   from,
   NormalizedCacheObject,
+  ApolloLink,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import merge from 'deepmerge';
@@ -14,25 +15,32 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.forEach(({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
-    );
-  if (networkError) console.log(`[Network error]: ${networkError}`);
-});
-
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_URI,
-  credentials: 'same-origin',
+  headers: {
+    authorization:
+      typeof window !== 'undefined' && localStorage.getItem('Auth-Token')
+        ? `Bearer ${localStorage.getItem('Auth-Token')}`
+        : '',
+  },
+});
+
+const afterwareLink = new ApolloLink((operation, forward) => {
+  return forward(operation).map((response) => {
+    const context = operation.getContext();
+    const authHeader = context.response.headers.get('Vendure-Auth-Token');
+
+    if (authHeader && typeof window !== 'undefined') {
+      localStorage.setItem('Auth-Token', authHeader);
+    }
+    return response;
+  });
 });
 
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: from([errorLink, httpLink]),
+    link: from([afterwareLink, httpLink]),
     cache: new InMemoryCache(),
   });
 }

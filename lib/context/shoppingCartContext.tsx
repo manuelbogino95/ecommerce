@@ -1,10 +1,11 @@
-import useStateWithStorage from 'lib/hooks/useLocalStorage';
-import { Order } from 'lib/types/order';
-import React, { Dispatch } from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_ACTIVE_ORDER } from 'lib/queries/orderQueries';
+import { GetActiveOrderResponse, Order } from 'lib/types/order';
+import React, { Dispatch, useEffect, useState } from 'react';
 
 export type ShoppingCartContextProps = {
-  order: Order;
-  setOrder: (order: Order) => void;
+  orderQuantity: number;
+  setOrderQuantity: (quantity: number) => void;
 };
 
 export const ShoppingCartContext =
@@ -17,10 +18,17 @@ export const ShoppingCartProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [order, setOrder] = useStateWithStorage('order', null);
+  const [orderQuantity, setOrderQuantity] = useState(0);
+  const { data } = useQuery<GetActiveOrderResponse>(GET_ACTIVE_ORDER);
+
+  useEffect(() => {
+    if (data?.activeOrder) {
+      setOrderQuantity(data.activeOrder.totalQuantity);
+    }
+  }, [data]);
 
   return (
-    <ShoppingCartContext.Provider value={{ order, setOrder }}>
+    <ShoppingCartContext.Provider value={{ orderQuantity, setOrderQuantity }}>
       {children}
     </ShoppingCartContext.Provider>
   );

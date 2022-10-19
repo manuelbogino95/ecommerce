@@ -14,6 +14,7 @@ export const theme: DefaultTheme = {
     white: '#FFFFFF',
     black: '#000000',
     green: '#1A953A',
+    indigo: '#6366f1',
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
   fontWeights: {
@@ -24,16 +25,12 @@ export const theme: DefaultTheme = {
   buttons: {
     primary: {
       color: 'white',
-      bg: 'blue',
+      bg: 'indigo',
     },
   },
   forms: {
     input: {
       color: 'black',
-      b: '2px solid',
-    },
-    select: {
-      borderRadius: 9999,
     },
     textarea: {},
     label: {},

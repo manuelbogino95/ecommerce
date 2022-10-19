@@ -7,7 +7,7 @@ const Footer = () => {
         minHeight: 200,
         mx: 'auto',
         p: 3,
-        backgroundColor: 'black',
+        backgroundColor: '#1F2937',
       }}
     >
       <Text color="white">

@@ -1,9 +1,13 @@
+import { FeaturedAsset } from './product';
+
 export interface OrderLine {
+  id: string;
+  featuredAsset: FeaturedAsset;
   productVariant: {
     id: string;
     name: string;
   };
-  unitPriceWithTax: number;
+  linePriceWithTax: number;
   quantity: number;
 }
 

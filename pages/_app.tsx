@@ -1,3 +1,4 @@
+import 'react-toastify/dist/ReactToastify.css';
 import { ApolloProvider } from '@apollo/client';
 import { ShoppingCartProvider } from 'lib/context/shoppingCartContext';
 import { AppProps } from 'next/app';

@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Navbar />
-      <Box p={40} mx="auto" minHeight="100vh">
+      <Box p={20} mx="auto" minHeight="100vh">
         {children}
       </Box>
       <Footer />

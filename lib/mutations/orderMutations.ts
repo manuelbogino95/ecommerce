@@ -1,19 +1,13 @@
 import { gql } from '@apollo/client';
+import { ORDER_FRAGMENT } from 'lib/queries/orderQueries';
 
 export const ADD_ITEM_TO_ORDER = gql`
   mutation addToCart($productVariantId: ID!, $qty: Int!) {
     addItemToOrder(productVariantId: $productVariantId, quantity: $qty) {
       ... on Order {
-        id
-        active
-        lines {
-          productVariant {
-            id
-            name
-          }
-          unitPriceWithTax
-        }
+        ...ActiveOrder
       }
     }
   }
+  ${ORDER_FRAGMENT}
 `;

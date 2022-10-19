@@ -1,20 +1,15 @@
 import { Flex, Box, Button } from 'rebass/styled-components';
 import { Input } from '@rebass/forms';
 import Image from 'next/image';
-import styled from 'styled-components';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useShoppingCart } from 'lib/context/shoppingCartContext';
-
-const InputContainer = styled.div`
-  margin-right: 6px;
-`;
+import { InputContainer, ShoppingCart } from './indes.styled';
 
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState('');
   const { push, pathname } = useRouter();
-  const { order } = useShoppingCart();
-  console.log('order', order);
+  const { orderQuantity } = useShoppingCart();
 
   const onSearchClick = () => {
     const query = searchValue ? `?q=${searchValue}` : '';
@@ -24,41 +19,51 @@ const Navbar = () => {
     });
   };
 
+  const onCheckoutClick = () => {
+    if (!orderQuantity) return;
+
+    push('/checkout');
+  };
+
   return (
-    <Flex
-      px={2}
-      py={2}
-      color="white"
-      backgroundColor="white"
-      alignItems="center"
-      justifyContent="space-between"
-    >
-      <div></div>
-      <Box>
-        <Flex>
-          <InputContainer>
-            <Input
-              value={searchValue}
-              onChange={({ target: { value } }) => setSearchValue(value)}
-              name="search"
-              placeholder="search..."
-              variant="primary"
-            />
-          </InputContainer>
-          <Button variant="primary" onClick={onSearchClick}>
-            Search
-          </Button>
-        </Flex>
-      </Box>
-      <Box>
-        <Image
-          src="/icons/shopping-cart.svg"
-          alt="shopping cart"
-          width="30"
-          height="30"
-        />
-      </Box>
-    </Flex>
+    <header>
+      <Flex
+        px={2}
+        py={2}
+        backgroundColor="#1F2937"
+        alignItems="center"
+        justifyContent="space-between"
+        height={70}
+      >
+        <div></div>
+        <Box>
+          <Flex>
+            <InputContainer>
+              <Input
+                value={searchValue}
+                onChange={({ target: { value } }) => setSearchValue(value)}
+                name="search"
+                placeholder="search..."
+                variant="primary"
+                backgroundColor="white"
+              />
+            </InputContainer>
+            <Button variant="primary" onClick={onSearchClick}>
+              Search
+            </Button>
+          </Flex>
+        </Box>
+        <ShoppingCart onClick={onCheckoutClick}>
+          <Image
+            src="/icons/shopping-cart.svg"
+            alt="shopping cart"
+            width="30"
+            height="30"
+          />
+          <div>{orderQuantity}</div>
+        </ShoppingCart>
+      </Flex>
+    </header>
   );
 };
 
