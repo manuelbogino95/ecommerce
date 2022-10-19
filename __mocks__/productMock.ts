@@ -6,7 +6,7 @@ export const createRandomSearchProduct = (): SearchProduct => {
     productId: faker.datatype.uuid(),
     sku: faker.random.word(),
     productName: faker.commerce.productName(),
-    slug: faker.datatype.string(),
+    slug: faker.commerce.productAdjective(),
     description: faker.commerce.productDescription(),
     productAsset: {
       preview: faker.image.avatar(),
